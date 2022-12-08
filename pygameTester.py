@@ -1,53 +1,57 @@
+import os
+import random
 import pygame
+from pygame.locals import * # Constants
+import math
+import sys
 
-# Define some colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+os.environ["SDL_VIDEO_CENTERED"] = "1"
 
-# Initialize pygame
-pygame.init()
+screen = pygame.display.set_mode((600, 600))
+pygame.display.set_caption("LEVEL 2 = Find the Correct Square!")
 
-# Set the width and height of the screen [width, height]
-screen_width = 800
-screen_height = 800
-screen = pygame.display.set_mode((screen_width, screen_height))
-
-# Set the title of the window
-pygame.display.set_caption("My Game")
-
-# Loop until the user clicks the close button.
-done = False
-
-# Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
 
-class Car(object):
-    def __init__(self, width, height, x, y):
-        self.rect = pygame.rect.Rect((x, y, width, height))
+class Player(object):
+    def __init__(self):
+        self.rect = pygame.draw.rect(screen, (0, 0, 128), (64, 54, 16, 16))
+        self.dist = 10
 
-    def move(self):
-        self.rect.move_ip(-20, 0)
+    def handle_keys(self):
+        for e in pygame.event.get():
+            if e.type == QUIT:
+                pygame.quit(); exit()
+            elif e.type == KEYDOWN:
+                key = e.key
+                if key == K_LEFT:
+                    self.draw_rect(-1, 0)
+                elif key == K_RIGHT:
+                    self.draw_rect(1, 0)
+                elif key == K_UP:
+                    self.draw_rect(0, -1)
+                elif key == K_DOWN:
+                    self.draw_rect(0, 1)
+                elif key == K_ESCAPE:
+                    pygame.quit(); exit()
+
+    def draw_rect(self, x, y):
+        screen.fill((255, 255, 255))
+        self.rect = self.rect.move(x * self.dist, y * self.dist);
+        pygame.draw.rect(screen, (0, 0, 128), self.rect)
+        pygame.display.update()
 
     def draw(self, surface):
-        pygame.draw.rect(surface, (0, 0, 128), self.rect)
+        pygame.draw.rect(surface, (0, 0, 128), (64, 54, 16, 16))
 
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            break
-            running = False
+pygame.init()
 
-    screen.fill((255, 255, 255))
-    car = Car(70, 40, 800, 400-20)
-    car.draw(screen)
-    car.move()
-    pygame.display.update()
+player = Player()
+# clock = pygame.time.Clock()
+screen.fill((255, 255, 255))
+player.draw(screen)
+pygame.display.update()
 
-    clock.tick(40)
-
-
-# Close the window and quit.
-pygame.quit()
+while True:
+    player.handle_keys()
