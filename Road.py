@@ -17,15 +17,15 @@ class Road(object):
         self.rect = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
 
     def create(self):
-        scale = self.height / 10
+        scale = self.height / 12
         delta = (self.height - scale * 8) / 2
-        num = math.floor((self.width - delta * 2) / (8 * scale))
+        num = math.floor((self.width - delta * 2) / (10 * scale))
         pygame.draw.rect(self.screen, self.color, self.rect)
         for i in range(num):
             if i % 2 == 0:
-                self.arrow(self.x + delta + 8*scale*i, self.y + delta, (169, 187, 217), scale)
+                self.show_arrow(self.x + delta + 10*scale*i, self.y + delta, (169, 187, 217), scale)
 
-    def arrow(self, x, y, color, scale):
+    def show_arrow(self, x, y, color, scale):
         A = (x + 0.5 * scale, y + 0.5 * scale)
         B = (x + 1 * scale, y + 0)
         C = (x + 5 * scale, y + 4 * scale)

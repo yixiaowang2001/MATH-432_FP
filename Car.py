@@ -19,9 +19,18 @@ class Car(object):
         self.rect = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
 
     def move(self):
-        # self.screen.fill((255, 255, 255))
+        self.update_speed()
         dx = math.cos(math.radians(self.angle)) * self.speed
         dy = math.sin(math.radians(self.angle)) * self.speed
         self.rect.move_ip(dx, dy)
         pygame.draw.rect(self.screen, self.color, self.rect)
+        self.draw_text(10, 10)
         pygame.display.update()
+
+    def draw_text(self, x, y):
+        my_font = pygame.font.SysFont('arial', 15)
+        text_surface = my_font.render(f'Car Speed: {round(self.speed, 4)}', True, (0, 0, 0))
+        self.screen.blit(text_surface, (x, y))
+
+    def update_speed(self):
+        self.speed = self.speed * 0.5 + 1
