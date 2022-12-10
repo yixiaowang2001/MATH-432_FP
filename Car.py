@@ -33,4 +33,5 @@ class Car(object):
         self.screen.blit(text_surface, (x, y))
 
     def update_speed(self):
-        self.speed = self.speed * 0.5 + 1
+        self.speed = self.speed + random.uniform(0, 1)
+        self.speed = self.speed - random.uniform(0, 1)
