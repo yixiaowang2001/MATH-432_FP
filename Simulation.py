@@ -4,11 +4,11 @@ import pygame
 
 scale = 8
 screen_height = 800
-screen_width = 800
+screen_width = 1400
 road_width = screen_width
 road_height = 3 * scale
 speed = 2
-fps = 50
+fps = 60
 car_width1 = 4 * scale
 car_height = 2 * scale
 car_color = (29, 97, 184)
