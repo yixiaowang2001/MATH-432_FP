@@ -3,7 +3,6 @@ from Road import Road
 import pygame
 
 scale = 8
-
 screen_height = 800
 screen_width = 800
 road_width = screen_width

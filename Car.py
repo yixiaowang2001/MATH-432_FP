@@ -5,8 +5,13 @@ from pygame.locals import *  # Constants
 import math
 import sys
 
+timesteps = 50
 
 class Car(object):
+    t = 0
+    v_0 = 16.6
+    a_i = 1.44
+
     def __init__(self, screen, width, height, x, y, speed, angle, color):
         self.x = x
         self.y = y
@@ -17,6 +22,8 @@ class Car(object):
         self.angle = angle
         self.color = color
         self.rect = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
+        self.v_0 = 16.6 
+        self.a_i = 1.44
 
     def move(self):
         self.update_speed()
@@ -32,5 +39,14 @@ class Car(object):
         text_surface = my_font.render(f'Car Speed: {round(self.speed, 4)}', True, (0, 0, 0))
         self.screen.blit(text_surface, (x, y))
 
+    # def update_speed(self):
+    #     self.speed = self.speed * 0.5 + 1
+        
     def update_speed(self):
-        self.speed = self.speed * 0.5 + 1
+        acceleration = self.a_i * (1-(self.speed/self.v_0)**4)
+       
+        self.speed += acceleration*1 
+      
+
+        
+    
