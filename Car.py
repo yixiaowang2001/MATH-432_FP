@@ -47,6 +47,3 @@ class Car(object):
        
         self.speed += acceleration*1 
       
-
-        
-    
