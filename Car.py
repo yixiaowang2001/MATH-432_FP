@@ -8,9 +8,7 @@ import sys
 timesteps = 50
 
 class Car(object):
-    t = 0
-    v_0 = 16.6
-    a_i = 1.44
+   
 
     def __init__(self, screen, width, height, x, y, speed, angle, color):
         self.x = x
@@ -22,10 +20,12 @@ class Car(object):
         self.angle = angle
         self.color = color
         self.rect = pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
-        self.v_0 = 16.6 
-        self.a_i = 1.44
+        self.v_desire = 16.6 
+        self.a_i = 8
 
     def move(self):
+        self.speed = 2
+      
         self.update_speed()
         dx = math.cos(math.radians(self.angle)) * self.speed
         dy = math.sin(math.radians(self.angle)) * self.speed
@@ -43,7 +43,9 @@ class Car(object):
     #     self.speed = self.speed * 0.5 + 1
         
     def update_speed(self):
-        acceleration = self.a_i * (1-(self.speed/self.v_0)**4)
+        acceleration = self.a_i * (1-(self.speed/self.v_desire)**4)
+     
        
         self.speed += acceleration*1 
+
       
