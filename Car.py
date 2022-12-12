@@ -44,8 +44,6 @@ class Car(object):
         
     def update_speed(self):
         acceleration = self.a_i * (1-(self.speed/self.v_desire)**4)
-     
-       
-        self.speed += acceleration*1 
+        self.speed += acceleration*1
 
       
